@@ -1,4 +1,4 @@
-import { ClonedCourseInfo, StringSet } from './Types'
+import { StringSet } from './Types'
 export class CourseInfo {
   private addedYear: StringSet
   public examCount: number
@@ -15,7 +15,7 @@ export class CourseInfo {
     public currentState: boolean
   ) {
     this.addedYear = {}
-    this.examCount = 1
+    this.examCount = 0
   }
 
   examAtThisYear(year: string) {
@@ -47,39 +47,5 @@ export class CourseInfo {
 
   incrementExamCount() {
     this.examCount += 1
-  }
-
-  deepCloneCourseInfo(): ClonedCourseInfo {
-    let name = this.name
-    let credit = this.credit
-    let score = this.score
-    let gradePoint = this.gradePoint
-    let initialSemester = this.initialSemester
-    let passSemester = this.passSemester
-    let examSemesters = []
-    for (const semester of this.examSemesters) {
-      examSemesters.push(semester)
-    }
-    let examYears = []
-    for (const year of this.examYears) {
-      examYears.push(year)
-    }
-    let currentState = this.currentState
-    let examCount = this.examCount
-
-    return {
-      name,
-      credit,
-      score,
-      gradePoint,
-      initialSemester,
-      passSemester,
-      examSemesters,
-      examYears,
-      currentState,
-      examCount,
-      passedAtThisYear: this.passedAtThisYear,
-      passedAtThisSemester: this.passedAtThisSemester,
-    }
   }
 }

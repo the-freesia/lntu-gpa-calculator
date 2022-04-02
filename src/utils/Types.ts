@@ -24,7 +24,7 @@ export type ClonedCourseInfo = {
 }
 
 export type ClassifiedCourses = {
-  [key: string]: ClonedCourseInfo[]
+  [key: string]: CourseMap
 }
 
 type ReusltOfSemester = {

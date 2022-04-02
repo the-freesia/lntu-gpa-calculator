@@ -116,34 +116,31 @@ export default class processHTMLFile {
           QUALIFIED
         )
         courseInfo.addExamYear(examYear)
+        // the first exam you taken
+        courseInfo.incrementExamCount()
 
-        // reExam and passed
-        if (reExam && score >= 60) {
-          courseInfo.incrementExamCount()
-        } else if (!reExam && score < 60) {
-          // you are not passed it but no reExam
+        if (score < 60) {
           courseInfo.currentState = UNQUALIFIED
           courseInfo.passSemester = ''
-        } else if (reExam && score < 60) {
-          // you reExam but still not pass this course
-          courseInfo.currentState = UNQUALIFIED
-          courseInfo.passSemester = ''
-          courseInfo.incrementExamCount()
         }
+        if (reExam) courseInfo.incrementExamCount()
+
         this.addedCourses[name] = courseInfo
       } else {
         // read information about this course again
         // should add exam DATE information
         this.addedCourses[name].examSemesters.push(semester)
         this.addedCourses[name].addExamYear(examYear)
+        // increment the exam count
+        this.addedCourses[name].incrementExamCount()
+
         // you passed it
         if (score >= 60) {
           this.addedCourses[name].currentState = QUALIFIED
           this.addedCourses[name].passSemester = semester
           this.addedCourses[name].gradePoint = gradePoint
         }
-        // increment the exam count
-        this.addedCourses[name].incrementExamCount()
+
         // update score
         if (score >= this.addedCourses[name].score) {
           this.addedCourses[name].score = score

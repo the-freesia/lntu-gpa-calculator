@@ -2,6 +2,7 @@ import processHTMLFile from './processHTMLFile'
 import { QUALIFIED } from './constants'
 import { CourseMap, ClassifiedCourses, ResultType } from './Types'
 import SemestersAndYears from './SemestersAndYears'
+import { cloneDeep } from 'lodash'
 
 export default class GradePointAverage {
   private courses: CourseMap
@@ -11,11 +12,12 @@ export default class GradePointAverage {
   constructor(HTMLString: string) {
     let phf = new processHTMLFile(HTMLString)
     this.courses = phf.Courses
+    console.log(this.courses)
     this.semestersAndYears = phf.semestersAndYears
     this.classifyCoursesBySemestersAndYears(this.courses)
   }
 
-  getTotalGPA(courses: any) {
+  getTotalGPA(courses: CourseMap) {
     let totalCredits = 0
     let totalCreditsMulGradePoint = 0
     for (const name in courses) {
@@ -27,7 +29,7 @@ export default class GradePointAverage {
     return totalCreditsMulGradePoint / totalCredits
   }
 
-  getTotalWAM(courses: any) {
+  getTotalWAM(courses: CourseMap) {
     let totalCredits = 0
     let totalCreditsMulScore = 0
     for (const name in courses) {
@@ -44,11 +46,11 @@ export default class GradePointAverage {
     this.coursesOfYears = {}
 
     for (const semester of semesters) {
-      this.coursesOfSemesters[semester] = []
+      this.coursesOfSemesters[semester] = {}
       for (const name in courses) {
         // exam at this semester
         if (courses[name].examAtThisSemester(semester)) {
-          let courseInfo = courses[name].deepCloneCourseInfo()
+          let courseInfo = cloneDeep(courses[name])
           // if qualified and examCount greater than 2
           if (
             courseInfo.currentState === QUALIFIED &&
@@ -58,17 +60,17 @@ export default class GradePointAverage {
               courseInfo.gradePoint = 0
             }
           }
-          this.coursesOfSemesters[semester].push(courseInfo)
+          this.coursesOfSemesters[semester][courseInfo.name] = courseInfo
         }
       }
     }
 
     for (const year of years) {
-      this.coursesOfYears[year] = []
+      this.coursesOfYears[year] = {}
       for (const name in courses) {
         // exam at this year
         if (courses[name].examAtThisYear(year)) {
-          let courseInfo = courses[name].deepCloneCourseInfo()
+          let courseInfo = cloneDeep(courses[name])
           // if qualified and examCount greater than 2
           if (
             courseInfo.currentState === QUALIFIED &&
@@ -78,7 +80,7 @@ export default class GradePointAverage {
               courseInfo.gradePoint = 0
             }
           }
-          this.coursesOfYears[year].push(courseInfo)
+          this.coursesOfYears[year][courseInfo.name] = courseInfo
         }
       }
     }

@@ -15,6 +15,23 @@ export function level2Point(level: string) {
   }
 }
 
+export function level2Score(level: string) {
+  switch (level) {
+    case '优秀':
+      return 95
+    case '良':
+      return 85
+    case '合格':
+      return 85
+    case '中':
+      return 75
+    case '及格':
+      return 60
+    default:
+      return 0
+  }
+}
+
 export function score2Point(score: number) {
   if (score >= 95) {
     return 4.5
