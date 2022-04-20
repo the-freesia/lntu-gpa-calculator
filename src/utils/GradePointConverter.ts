@@ -26,7 +26,7 @@ export function level2Score(level: string) {
     case '中':
       return 75
     case '及格':
-      return 60
+      return 65
     default:
       return 0
   }
