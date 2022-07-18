@@ -1,0 +1,21 @@
+.resultCard {
+    width: 220px;
+    /* height: auto;
+    padding: 10px 0 10px 40px;
+    */
+    margin-left: 20px;
+    margin-right: 20px;
+    /* margin: 10px; */
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.item-title {
+    font-size: 20px;
+    color: rgb(79, 70, 229);
+}
+
+item-gpa, item-wam {
+    font-size: 16px;
+}
