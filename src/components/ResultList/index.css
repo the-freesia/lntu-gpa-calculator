@@ -1,6 +1,6 @@
 .listContainer {
     flex-wrap: wrap;
-    width: calc(100vw - 300px);
+    width: auto;
     min-width: 400px;
     height: auto;
     margin: 30px auto;
