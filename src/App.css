@@ -1,6 +1,7 @@
 @import '~antd/dist/antd.css';
 body {
-    background-color: rgb(243, 244, 246);
+    /* background-color: rgb(243, 244, 246); */
+    background-color: #fff;
 }
 
 .readme {
