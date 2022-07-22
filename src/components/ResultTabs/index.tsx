@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import { Tabs } from 'antd'
 
 
-import { AppContext } from '../../App'
+import { AppContext } from '../../pages'
 import ResultTab from '../ResultTab'
 
 const { TabPane } = Tabs
 
-interface ResultTabProps {}
+interface ResultTabProps { }
 
 const ResultTabs: React.FC<ResultTabProps> = () => {
   const gpaData = useContext(AppContext)
