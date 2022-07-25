@@ -8,7 +8,7 @@
     "distDir": "../build"
   },
   "package": {
-    "productName": "lntu-gpa-computer",
+    "productName": "lntu-gpa-calculator",
     "version": "0.1.0"
   },
   "tauri": {
@@ -30,7 +30,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.lgc.dev",
+      "identifier": "com.driver.se.sc.lntu",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -59,7 +59,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "lntu-gpa-computer",
+        "title": "辽宁工程技术大学绩点计算器",
         "width": 800
       }
     ]
