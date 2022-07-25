@@ -29,7 +29,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "tauri": "tauri",
+    "tauri": "tauri dev",
     "bundle": "tauri build"
   },
   "eslintConfig": {

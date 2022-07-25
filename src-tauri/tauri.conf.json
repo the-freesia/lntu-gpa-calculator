@@ -1,7 +1,6 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "beforeBuildCommand": "",
     "beforeDevCommand": "yarn start",
     "beforeBuildCommand": "yarn build",
     "devPath": "http://localhost:3000",
@@ -58,7 +57,7 @@
       {
         "fullscreen": false,
         "height": 600,
-        "resizable": true,
+        "resizable": false,
         "title": "辽宁工程技术大学绩点计算器",
         "width": 800
       }
