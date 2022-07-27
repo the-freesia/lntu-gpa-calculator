@@ -8,6 +8,7 @@ import { ResultType } from '../../utils/Types'
 import ResultTabs from '../../components/ResultTabs'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import { open } from '@tauri-apps/api/shell'
 
 export const AppContext = React.createContext<ResultType | undefined>({
     gpa: 0,
@@ -26,7 +27,8 @@ export function Home() {
             <div>
                 <Header />
                 <div className={'readme'}>
-                    <Button type='link' href='https://gpahelp.xcland.tech/'>使用指北</Button>
+                    {/* <Button type='link' href='https://gpahelp.xcland.tech/'>使用指北</Button> */}
+                    <Button type='link' onClick={async () => { await open('https://gpahelp.xcland.tech') }}>使用指北</Button>
                     <Button type='link' onClick={() => { navigate('guide') }}>使用指北（Beta）</Button>
                 </div>
                 <FileReader setGPAData={setGPAData} />
