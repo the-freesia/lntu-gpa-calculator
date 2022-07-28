@@ -27,8 +27,18 @@ export function Home() {
             <div>
                 <Header />
                 <div className={'readme'}>
-                    {/* <Button type='link' href='https://gpahelp.xcland.tech/'>使用指北</Button> */}
-                    <Button type='link' onClick={async () => { await open('https://gpahelp.xcland.tech') }}>使用指北</Button>
+                    <Button
+                        type='link'
+                        onClick={async () => {
+                            try {
+                                await open('https://gpahelp.xcland.tech')
+                            } catch {
+                                window.open('https://gpahelp.xcland.tech', '_blank');
+                            }
+                        }}
+                    >
+                        使用指北
+                    </Button>
                     <Button type='link' onClick={() => { navigate('guide') }}>使用指北（Beta）</Button>
                 </div>
                 <FileReader setGPAData={setGPAData} />
