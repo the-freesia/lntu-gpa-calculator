@@ -43,7 +43,7 @@ export function Guide() {
   ];
 
   return (
-    <div>
+    <div className="max-w-screen-lg m-auto">
       <PageHeader
         className=""
         onBack={() => {
@@ -52,41 +52,38 @@ export function Guide() {
         title="使用指北"
         subTitle="(beta)"
       />
-      <div>
-        <div className={"mx-4"}>
-          <Steps className={"flex-nowrap"} current={current}>
-            {steps.map((item) => (
-              <Step
-                className={"justify-center"}
-                key={item.title}
-                title={item.title}
-              />
-            ))}
-          </Steps>
-        </div>
-        <div className={"m-4 min-h-50"}>{steps[current].content}</div>
-        <div className={"flex flex-row-reverse mr-4"}>
-          {current < steps.length - 1 && (
-            <Button type="primary" onClick={() => next()}>
-              下一步
-            </Button>
-          )}
-          {current === steps.length - 1 && (
-            <Button
-              type="primary"
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              去计算
-            </Button>
-          )}
-          {current > 0 && (
-            <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-              上一步
-            </Button>
-          )}
-        </div>
+      <div className={"mx-4"}>
+        <Steps current={current}>
+          {steps.map((item) => (
+            <Step
+              key={item.title}
+              title={item.title}
+            />
+          ))}
+        </Steps>
+      </div>
+      <div className={"m-4 min-h-50"}>{steps[current].content}</div>
+      <div className={"flex flex-row-reverse m-8"}>
+        {current < steps.length - 1 && (
+          <Button type="primary" onClick={() => next()}>
+            下一步
+          </Button>
+        )}
+        {current === steps.length - 1 && (
+          <Button
+            type="primary"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            去计算
+          </Button>
+        )}
+        {current > 0 && (
+          <Button className={'mr-2'} onClick={() => prev()}>
+            上一步
+          </Button>
+        )}
       </div>
     </div>
   );
