@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { message } from 'antd'
 import './index.css'
 import GradePointAverage from '../../utils/GPA'
 import { ResultType } from '../../utils/Types'
 
 interface FRCprops {
-  setGPAData: React.Dispatch<React.SetStateAction<ResultType>>
+  setGPAData: React.Dispatch<React.SetStateAction<ResultType | undefined>>
 }
 
 const FileReaderComponent: React.FC<FRCprops> = ({ setGPAData }) => {
@@ -12,17 +13,21 @@ const FileReaderComponent: React.FC<FRCprops> = ({ setGPAData }) => {
     name: '',
     size: '',
   })
-
+  // eslint-disable-next-line
   const [loaded, setLoaded] = useState(false)
+  // eslint-disable-next-line
   const [computed, setComputed] = useState(false)
 
   const file = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
     if (fileInfo.size !== '') {
+      message.info("文件已加载");
+      setGPAData(undefined)
       setLoaded(true)
       setComputed(false)
     }
+    // eslint-disable-next-line
   }, [fileInfo])
 
   //   const GPAStat = useContext(AppContext)
@@ -34,7 +39,7 @@ const FileReaderComponent: React.FC<FRCprops> = ({ setGPAData }) => {
         return
       }
     }
-    setComputed(true)
+    
     let fileReader = new FileReader()
     const currentFile = file?.current?.files![0]
     fileReader.readAsText(currentFile as File, 'utf-8')
@@ -44,8 +49,11 @@ const FileReaderComponent: React.FC<FRCprops> = ({ setGPAData }) => {
       try {
         const gpa = new GradePointAverage(content as string)
         setGPAData(gpa.gpaAndWAM)
+        setComputed(true)
+        message.success("计算成功")
       } catch (error) {
-        alert('文件格式错误或内容异常，请重新选择')
+        // alert('文件格式错误或内容异常，请重新选择')
+        message.error("文件格式错误或内容异常，请重新选择")
         console.log(error)
         setComputed(false)
         setLoaded(false)
@@ -76,7 +84,7 @@ const FileReaderComponent: React.FC<FRCprops> = ({ setGPAData }) => {
           计算成绩{' '}
         </label>
       </div>
-      {loaded ? (
+      {/* {loaded ? (
         <div className="notice">
           <p className={'notice-item'}>
             {computed ? '计算结果如下' : '文件已加载'}
@@ -84,7 +92,7 @@ const FileReaderComponent: React.FC<FRCprops> = ({ setGPAData }) => {
         </div>
       ) : (
         ''
-      )}
+      )} */}
     </>
   )
 }
